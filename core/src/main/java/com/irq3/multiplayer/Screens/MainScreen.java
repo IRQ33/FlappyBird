@@ -27,10 +27,11 @@ public class MainScreen implements Screen {
         batch = main.batch;
 
 
+
         hierarchyManager = new HierarchyManager();
         player=  new Player(-120,0,new Texture(Gdx.files.internal("birb.png")));
         hierarchyManager.addElement(player);
-
+        Gdx.input.setInputProcessor(player.movement);
     }
 
 
@@ -53,8 +54,7 @@ public class MainScreen implements Screen {
         batch.end();
 
         /* Rest things*/
-        player.movingPlayer();
-
+        player.movement.movePlayer();
     }
 
     @Override

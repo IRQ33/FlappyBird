@@ -12,29 +12,22 @@ public class Movement implements InputProcessor {
         this.player=  player;
     }
 
-    boolean isClickedJumpButton = false;
-
     @Override
     public boolean keyDown(int i) {
-        switch (i){
+        switch (i)
+        {
             case Input.Keys.SPACE:
-            case Input.Buttons.LEFT:
-                isClickedJumpButton = true;
+                player.setElementY(player.getElementY()+5);
+                break;
             case Input.Keys.ESCAPE:
                 Gdx.app.exit();
         }
+
         return false;
     }
 
     @Override
     public boolean keyUp(int i) {
-        switch (i)
-        {
-            case Input.Keys.SPACE:
-            case Input.Buttons.LEFT:
-                isClickedJumpButton =false;
-        }
-
 
         return false;
     }
@@ -76,10 +69,9 @@ public class Movement implements InputProcessor {
 
     public void movePlayer()
     {
-        if(isClickedJumpButton)
-        {
-            player.setElementY(player.getElementY()+5);
-        }
+        System.out.println("X: "+player.getElementX() + " Y:"+player.getElementY());
+        player.setElementY(player.getElementY()-0.1);
+//
     }
 
 }
