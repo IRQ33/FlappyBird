@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.irq3.multiplayer.Main;
 import com.irq3.multiplayer.Managers.HierarchyManager;
 import com.irq3.multiplayer.Models.Element;
-import com.irq3.multiplayer.Objects.Player;
+import com.irq3.multiplayer.Objects.Player.Player;
 import com.irq3.multiplayer.Objects.TestObject;
 
 public class MainScreen implements Screen {

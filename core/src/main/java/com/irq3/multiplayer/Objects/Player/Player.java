@@ -1,4 +1,4 @@
-package com.irq3.multiplayer.Objects;
+package com.irq3.multiplayer.Objects.Player;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
