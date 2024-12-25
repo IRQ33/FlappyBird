@@ -25,7 +25,7 @@ public class MainScreen implements Screen {
     {
         camera=  new OrthographicCamera(256,240);
         batch = main.batch;
-
+        //WORKING
 
 
         hierarchyManager = new HierarchyManager();
