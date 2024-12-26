@@ -2,6 +2,7 @@ package com.irq3.multiplayer.Managers;
 
 import com.irq3.multiplayer.Models.Element;
 import com.irq3.multiplayer.Objects.Pipe.Pipe;
+import com.irq3.multiplayer.Screens.MainScreen;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +33,7 @@ public class PipeManager {
             {
                 pipemanager.remove(pipe);
                 pipeArrayList.remove(pipe);
+                MainScreen.hierarchyManager.deleteElement(1);
 
             }
         }

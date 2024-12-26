@@ -19,7 +19,7 @@ import java.util.Random;
 
 public class MainScreen implements Screen {
 
-    HierarchyManager hierarchyManager;
+    public static HierarchyManager hierarchyManager;
     PipeManager pipeManager;
     SpriteBatch batch;
     final Camera camera;
