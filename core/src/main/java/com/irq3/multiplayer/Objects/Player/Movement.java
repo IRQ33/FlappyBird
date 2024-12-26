@@ -69,7 +69,6 @@ public class Movement implements InputProcessor {
 
     public void movePlayer()
     {
-        System.out.println("X: "+player.getElementX() + " Y:"+player.getElementY());
         player.setElementY(player.getElementY()-0.1);
 //
     }
