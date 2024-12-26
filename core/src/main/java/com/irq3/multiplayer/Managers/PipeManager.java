@@ -14,6 +14,7 @@ public class PipeManager {
     public PipeManager(List<Element> pipemanager)
     {
         this.pipemanager = pipemanager;
+        pipeArrayList = new ArrayList<>();
     }
 
     public void Create(Pipe pipe)
@@ -29,7 +30,9 @@ public class PipeManager {
             pipe.setElementX(pipe.getElementX()-1);
             if(pipe.getElementX()== -300)
             {
+                pipemanager.remove(pipe);
                 pipeArrayList.remove(pipe);
+
             }
         }
     }

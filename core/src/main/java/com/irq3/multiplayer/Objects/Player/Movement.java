@@ -3,6 +3,7 @@ package com.irq3.multiplayer.Objects.Player;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.irq3.multiplayer.FastConfig;
 
 public class Movement implements InputProcessor {
 
@@ -17,7 +18,7 @@ public class Movement implements InputProcessor {
         switch (i)
         {
             case Input.Keys.SPACE:
-                player.setElementY(player.getElementY()+5);
+                player.setElementY(player.getElementY()+FastConfig.playerForceJump);
                 break;
             case Input.Keys.ESCAPE:
                 Gdx.app.exit();
@@ -69,7 +70,7 @@ public class Movement implements InputProcessor {
 
     public void movePlayer()
     {
-        player.setElementY(player.getElementY()-0.1);
+        player.setElementY(player.getElementY()- FastConfig.playerGravitation);
 //
     }
 

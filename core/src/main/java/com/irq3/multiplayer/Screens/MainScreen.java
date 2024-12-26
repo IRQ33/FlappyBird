@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.irq3.multiplayer.FastConfig;
 import com.irq3.multiplayer.Main;
 import com.irq3.multiplayer.Managers.HierarchyManager;
 import com.irq3.multiplayer.Managers.PipeManager;
@@ -42,6 +43,7 @@ public class MainScreen implements Screen {
         //Game Element things
         pipeBottom = new Texture(Gdx.files.internal("bottompipe.png"));
         pipeUp = new Texture(Gdx.files.internal("toppipe.png"));
+
         player=  new Player(-120,0,new Texture(Gdx.files.internal("birb.png")));
         hierarchyManager.addElement(player);
         Gdx.input.setInputProcessor(player.movement);
@@ -72,7 +74,7 @@ public class MainScreen implements Screen {
         player.movement.movePlayer();
         timer++;
         pipeMoveX--;
-        if (timer == 120)
+        if (timer == FastConfig.pipeRespawnTime)
         {
             int pipeRnd = random.nextInt(2);
             if(pipeRnd==0)
