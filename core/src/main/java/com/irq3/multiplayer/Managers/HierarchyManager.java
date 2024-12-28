@@ -27,9 +27,6 @@ public class HierarchyManager {
     {
         elementList.add(element);
     }
-    public void deleteElement(int index)
-    {
-        elementList.remove(index);
-    }
+    public void deleteElement(Element element) { elementList.remove(element);}
 
 }

@@ -8,10 +8,11 @@ import com.irq3.multiplayer.Models.Element;
 public class Player extends Element {
 
     public Movement movement;
-    public Player(double playerX, double playerY, Texture playerTexture) {
-        super(playerX, playerY, playerTexture);
+
+
+    public Player(double elementX, double elementY, Texture elementTexture, double sizeX, double sizeY) {
+        super(elementX, elementY, elementTexture, sizeX, sizeY);
         this.movement = new Movement(this);
+
     }
-
-
 }

@@ -71,6 +71,11 @@ public class Movement implements InputProcessor {
     public void movePlayer()
     {
         player.setElementY(player.getElementY()- FastConfig.playerGravitation);
+        if(player.getElementY()<=-120)
+        {
+            System.out.println("xd");
+            Gdx.app.exit();
+        }
 //
     }
 

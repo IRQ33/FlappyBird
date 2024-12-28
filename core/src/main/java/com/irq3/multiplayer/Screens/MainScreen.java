@@ -29,6 +29,7 @@ public class MainScreen implements Screen {
     Texture pipeUp;
     int pipeMoveX=220;
     Random random;
+    int count = 0;
 
     public MainScreen(Main main)
     {
@@ -44,7 +45,7 @@ public class MainScreen implements Screen {
         pipeBottom = new Texture(Gdx.files.internal("bottompipe.png"));
         pipeUp = new Texture(Gdx.files.internal("toppipe.png"));
 
-        player=  new Player(-120,0,new Texture(Gdx.files.internal("birb.png")));
+        player=  new Player(-120,0,new Texture(Gdx.files.internal("birb.png")), 32,32);
         hierarchyManager.addElement(player);
         Gdx.input.setInputProcessor(player.movement);
 
@@ -59,13 +60,15 @@ public class MainScreen implements Screen {
     @Override
     public void render(float v) {
 
+
+
         /* Screen               */
         ScreenUtils.clear(0, 128, 128, 1);
         camera.update();
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
         for (Element element : hierarchyManager.getElementList()) {
-            batch.draw(element.getElementTexture(), (float) element.getElementX(), (float) element.getElementY());
+            batch.draw(element.getElementTexture(), (float) element.getElementX(), (float) element.getElementY(), (float) element.getSizeX(), (float) element.getSizeY());
         }
         batch.end();
 
@@ -74,18 +77,27 @@ public class MainScreen implements Screen {
         player.movement.movePlayer();
         timer++;
         pipeMoveX--;
-        if (timer == FastConfig.pipeRespawnTime)
-        {
+
+        if (timer == FastConfig.pipeRespawnTime) {
+
+
             int pipeRnd = random.nextInt(2);
-            if(pipeRnd==0)
-            {
-                pipeManager.Create(new Pipe(220,-80,pipeBottom));
-            }else {
-                pipeManager.Create(new Pipe(220,80,pipeUp));
+            System.out.println(pipeRnd);
+
+            //ogarnij te zakresy
+            int heightBottom = random.nextInt(70) - 200;
+            int heighTop = random.nextInt(60) + 30;
+
+            if (pipeRnd == 0) {
+                System.out.println(pipeRnd + " so bottom");
+                pipeManager.Create(new Pipe(220, heightBottom, pipeBottom, 68, 160));
+            } else {
+                System.out.println(pipeRnd + " so top");
+                pipeManager.Create(new Pipe(220, heighTop, pipeUp, 68, 160));
             }
-            timer=0;
-            System.out.println("work");
+            timer = 0;
         }
+
 
 
 
