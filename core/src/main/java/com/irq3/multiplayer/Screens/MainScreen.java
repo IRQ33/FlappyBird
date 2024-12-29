@@ -3,10 +3,17 @@ package com.irq3.multiplayer.Screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.ScreenUtils;
+
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.github.tommyettinger.textra.TextraLabel;
 import com.irq3.multiplayer.FastConfig;
 import com.irq3.multiplayer.Main;
 import com.irq3.multiplayer.Managers.HierarchyManager;
@@ -30,6 +37,10 @@ public class MainScreen implements Screen {
     Texture pipeUp;
     Random random;
     Die die;
+    BitmapFont font;
+    Skin skin;
+    int score;
+
 
     public MainScreen(Main main)
     {
@@ -39,6 +50,7 @@ public class MainScreen implements Screen {
         hierarchyManager = new HierarchyManager();
         pipeManager = new PipeManager();
         random = new Random();
+        skin = new Skin();
 
 
         //Game Element things
@@ -48,6 +60,14 @@ public class MainScreen implements Screen {
         hierarchyManager.addElement(player);
         Gdx.input.setInputProcessor(player.movement);
         die = new Die(player);
+
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = 15; // Ustaw odpowiedni rozmiar
+        parameter.magFilter = Texture.TextureFilter.Nearest;
+        parameter.minFilter = Texture.TextureFilter.Nearest;
+         font = generator.generateFont(parameter);
+        generator.dispose();
 
     }
 
@@ -60,8 +80,6 @@ public class MainScreen implements Screen {
     @Override
     public void render(float v) {
 
-
-
         /* Screen               */
         ScreenUtils.clear(0, 128, 128, 1);
         camera.update();
@@ -70,22 +88,24 @@ public class MainScreen implements Screen {
         for (Element element : hierarchyManager.getElementList()) {
             batch.draw(element.getElementTexture(), (float) element.getElementX(), (float) element.getElementY(), (float) element.getSizeX(), (float) element.getSizeY());
         }
-        batch.end();
 
+        font.draw(batch,"score: "+ score,40,110);
+        batch.end();
         /* Rest things*/
         pipeManager.PipeMoveAndDelete();
         player.movement.movePlayer();
         timer++;
 
         spawnPipes();
-        die.DieState();
+        die.DieUpdate();
 
 
     }
 
     private void spawnPipes() {
-        if (!(timer == FastConfig.pipeRespawnTime))  return;
 
+        if (!(timer == FastConfig.pipeRespawnTime))  return;
+            score++;
             int pipeRnd = random.nextInt(2);
 
             int heightBottom = random.nextInt(70) - 200;
@@ -123,6 +143,6 @@ public class MainScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        font.dispose();
     }
 }

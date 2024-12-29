@@ -6,4 +6,7 @@ dependencies {
   api "com.badlogicgames.gdx:gdx:$gdxVersion"
   api "com.github.lyze237:gdx-UnBox2D:$unbox2dVersion"
   api "space.earlygrey:shapedrawer:$shapeDrawerVersion"
+  implementation "com.github.tommyettinger:textratypist:1.1.0"
+  api "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+
 }
