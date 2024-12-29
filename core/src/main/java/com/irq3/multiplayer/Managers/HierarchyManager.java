@@ -9,20 +9,16 @@ public class HierarchyManager {
 
     public HierarchyManager()
     {
-        elementList = new ArrayList<Element>();
+        elementList = new ArrayList<>();
     }
 
-    private List<Element> elementList;
+    private final List<Element> elementList;
 
     public List<Element> getElementList() {
         return elementList;
     }
 
 
-    public Element getElement(int index)
-    {
-        return elementList.get(index);
-    }
     public void addElement(Element element)
     {
         elementList.add(element);

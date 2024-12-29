@@ -13,6 +13,7 @@ import com.irq3.multiplayer.Managers.HierarchyManager;
 import com.irq3.multiplayer.Managers.PipeManager;
 import com.irq3.multiplayer.Models.Element;
 import com.irq3.multiplayer.Objects.Pipe.Pipe;
+import com.irq3.multiplayer.Objects.Player.Die;
 import com.irq3.multiplayer.Objects.Player.Player;
 
 import java.util.Random;
@@ -27,9 +28,8 @@ public class MainScreen implements Screen {
     int timer= 0;
     Texture pipeBottom;
     Texture pipeUp;
-    int pipeMoveX=220;
     Random random;
-    int count = 0;
+    Die die;
 
     public MainScreen(Main main)
     {
@@ -37,17 +37,17 @@ public class MainScreen implements Screen {
         camera=  new OrthographicCamera(256,240);
         batch = main.batch;
         hierarchyManager = new HierarchyManager();
-        pipeManager = new PipeManager(hierarchyManager.getElementList());
+        pipeManager = new PipeManager();
         random = new Random();
 
 
         //Game Element things
         pipeBottom = new Texture(Gdx.files.internal("bottompipe.png"));
         pipeUp = new Texture(Gdx.files.internal("toppipe.png"));
-
         player=  new Player(-120,0,new Texture(Gdx.files.internal("birb.png")), 32,32);
         hierarchyManager.addElement(player);
         Gdx.input.setInputProcessor(player.movement);
+        die = new Die(player);
 
     }
 
@@ -76,31 +76,28 @@ public class MainScreen implements Screen {
         pipeManager.PipeMoveAndDelete();
         player.movement.movePlayer();
         timer++;
-        pipeMoveX--;
 
-        if (timer == FastConfig.pipeRespawnTime) {
+        spawnPipes();
+        die.DieState();
 
+
+    }
+
+    private void spawnPipes() {
+        if (!(timer == FastConfig.pipeRespawnTime))  return;
 
             int pipeRnd = random.nextInt(2);
-            System.out.println(pipeRnd);
 
-            //ogarnij te zakresy
             int heightBottom = random.nextInt(70) - 200;
             int heighTop = random.nextInt(60) + 30;
 
             if (pipeRnd == 0) {
-                System.out.println(pipeRnd + " so bottom");
                 pipeManager.Create(new Pipe(220, heightBottom, pipeBottom, 68, 160));
-            } else {
-                System.out.println(pipeRnd + " so top");
-                pipeManager.Create(new Pipe(220, heighTop, pipeUp, 68, 160));
+                timer = 0;
+                return;
             }
-            timer = 0;
-        }
-
-
-
-
+                pipeManager.Create(new Pipe(220, heighTop, pipeUp, 68, 160));
+                timer = 0;
 
     }
 

@@ -1,8 +1,8 @@
 package com.irq3.multiplayer.Objects.Player;
 
 import com.badlogic.gdx.Gdx;
-import com.irq3.multiplayer.Managers.PipeManager;
-import com.irq3.multiplayer.Objects.Pipe.Pipe;
+import com.irq3.multiplayer.Models.Element;
+import com.irq3.multiplayer.Screens.MainScreen;
 
 public class Die {
     Player player;
@@ -14,9 +14,10 @@ public class Die {
 
     public void DieState()
     {
-        for (Pipe pipe: PipeManager.pipeArrayList)
+        for (Element element: MainScreen.hierarchyManager.getElementList())
         {
-            if(player.overlaps(pipe))
+            if(element instanceof Player) return;
+            if(player.overlaps(element))
             {
                 Gdx.app.exit();
             }

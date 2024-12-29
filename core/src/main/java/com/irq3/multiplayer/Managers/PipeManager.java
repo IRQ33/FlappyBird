@@ -1,43 +1,37 @@
 package com.irq3.multiplayer.Managers;
 
 import com.irq3.multiplayer.FastConfig;
-import com.irq3.multiplayer.Models.Element;
 import com.irq3.multiplayer.Objects.Pipe.Pipe;
 import com.irq3.multiplayer.Screens.MainScreen;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
 
 public class PipeManager {
 
-    public List<Element> pipemanager;
     public static ArrayList<Pipe> pipeArrayList;
 
-    public PipeManager(List<Element> pipemanager)
+    public PipeManager()
     {
-        this.pipemanager = pipemanager;
         pipeArrayList = new ArrayList<>();
     }
 
     public void Create(Pipe pipe)
     {
-        pipemanager.add(pipe);
+        MainScreen.hierarchyManager.addElement(pipe);
         pipeArrayList.add(pipe);
 
     }
-    public void PipeMoveAndDelete()
-    {
-        for (Pipe pipe : pipeArrayList)
-        {
-            pipe.setElementX(pipe.getElementX()- FastConfig.pipeSpeed);
-            if(pipe.getElementX()<=-300)
-            {
-                pipemanager.remove(pipe);
+    public void PipeMoveAndDelete() {
+        Iterator<Pipe> iterator = pipeArrayList.iterator();
+        while (iterator.hasNext()) {
+            Pipe pipe = iterator.next();
+            pipe.setElementX(pipe.getElementX() - FastConfig.pipeSpeed);
+            if (pipe.getElementX() <= -300) {
                 MainScreen.hierarchyManager.deleteElement(pipe);
-                pipeArrayList.remove(pipe);
+                iterator.remove(); // Bezpieczne usuwanie elementu
             }
         }
-
     }
 
 
