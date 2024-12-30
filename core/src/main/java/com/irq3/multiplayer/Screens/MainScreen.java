@@ -38,7 +38,6 @@ public class MainScreen implements Screen {
     Random random;
     Die die;
     BitmapFont font;
-    Skin skin;
     int score;
 
 
@@ -50,7 +49,6 @@ public class MainScreen implements Screen {
         hierarchyManager = new HierarchyManager();
         pipeManager = new PipeManager();
         random = new Random();
-        skin = new Skin();
 
 
         //Game Element things
@@ -63,7 +61,7 @@ public class MainScreen implements Screen {
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 15; // Ustaw odpowiedni rozmiar
+        parameter.size = 15;
         parameter.magFilter = Texture.TextureFilter.Nearest;
         parameter.minFilter = Texture.TextureFilter.Nearest;
          font = generator.generateFont(parameter);
@@ -112,11 +110,11 @@ public class MainScreen implements Screen {
             int heighTop = random.nextInt(60) + 30;
 
             if (pipeRnd == 0) {
-                pipeManager.Create(new Pipe(220, heightBottom, pipeBottom, 68, 160));
+                pipeManager.Create(new Pipe(220, heightBottom, pipeBottom, 70 , 160));
                 timer = 0;
                 return;
             }
-                pipeManager.Create(new Pipe(220, heighTop, pipeUp, 68, 160));
+                pipeManager.Create(new Pipe(220, heighTop, pipeUp, 70, 160));
                 timer = 0;
 
     }
@@ -144,5 +142,7 @@ public class MainScreen implements Screen {
     @Override
     public void dispose() {
         font.dispose();
+        batch.dispose();
+
     }
 }

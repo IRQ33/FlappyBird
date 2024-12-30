@@ -1,6 +1,7 @@
 package com.irq3.multiplayer.Objects.Player;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.irq3.multiplayer.Models.Element;
 import com.irq3.multiplayer.Screens.MainScreen;
@@ -17,13 +18,14 @@ public class Die {
     {
         for (Element element: MainScreen.hierarchyManager.getElementList())
         {
-            if(element instanceof Player) return;
-            System.out.println("test");
+            if(element instanceof Player) continue;
 
-            if(player.getRectangle().overlaps(element.getRectangle()))
+            if(Intersector.overlaps(player.getRectangle(), element.getRectangle()))
             {
-                Gdx.app.exit();
+                System.out.println("test2");
+
             }
+
         }
     }
 }

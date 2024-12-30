@@ -19,6 +19,7 @@ public class Movement implements InputProcessor {
         {
             case Input.Keys.SPACE:
                 player.setElementY(player.getElementY()+FastConfig.playerForceJump);
+                player.getRectangle().y = (float) (player.getElementY()+FastConfig.playerForceJump);
                 break;
             case Input.Keys.ESCAPE:
                 Gdx.app.exit();
