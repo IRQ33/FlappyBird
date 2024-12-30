@@ -2,7 +2,6 @@ package com.irq3.multiplayer.Objects.Player;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Intersector;
-import com.badlogic.gdx.math.Rectangle;
 import com.irq3.multiplayer.Models.Element;
 import com.irq3.multiplayer.Screens.MainScreen;
 
@@ -22,8 +21,8 @@ public class Die {
 
             if(Intersector.overlaps(player.getRectangle(), element.getRectangle()))
             {
-                System.out.println("test2");
-
+                System.out.println("Collision   ");
+                Gdx.app.exit();
             }
 
         }

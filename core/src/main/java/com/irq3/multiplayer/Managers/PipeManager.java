@@ -30,7 +30,7 @@ public class PipeManager {
             pipe.getRectangle().x = (float) (pipe.getElementX() - FastConfig.pipeSpeed);
             if (pipe.getElementX() <= -300) {
                 MainScreen.hierarchyManager.deleteElement(pipe);
-                iterator.remove(); // Bezpieczne usuwanie elementu
+                iterator.remove(); // fuck instagram
             }
         }
     }
